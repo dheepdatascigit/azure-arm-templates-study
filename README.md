@@ -25,3 +25,4 @@ Get-AzSubscription | Format-List -Property Name, Id | Format-Table # lists Subsc
 ```shell
 git tag -a v1.01 -m "blank template run"
 ```
+add tags at each milestone
