@@ -16,7 +16,7 @@ Set-AzDefault -ResourceGroupName learn-8966c842-dd73-4d69-a4a3-66739dbee752
 # Deploy the template
 $templateFile = "azuredeploy.json"
 $today=Get-Date -Format "dd-MM-yyyy"
-$deploymentName="blanktemplate-"+"$today"
+$deploymentName="addstorage-"+"$today"
 New-AzResourceGroupDeployment `
   -Name $deploymentName `
   -TemplateFile $templateFile
