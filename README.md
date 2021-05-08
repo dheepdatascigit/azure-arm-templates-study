@@ -14,3 +14,9 @@ To start working with Azure PowerShell, sign in with your Azure credentials.
 ```powershell
 Connect-AzAccount
 ```
+
+# Some powershell commands
+```powershell
+Get-AzTenant #get all authorized tenants for an Azure account
+Get-AzSubscription | Format-List -Property Name, Id | Format-Table # lists Subscriptions
+```
