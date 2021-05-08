@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "storagePrefix": {
+        "value": "mystrg01dev"
+      },
+      "storageSKU": {
+        "value": "Standard_LRS"
+      },
+      "resourceTags": {
+        "value": {
+          "Environment": "Dev",
+          "Project": "AZ ARN template test - Learn",
+          "Author": "Dheep"
+        }
+      }
+    }
+  }

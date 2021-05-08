@@ -1,9 +1,9 @@
 # Deploy the template
 $templateFile = "azuredeploy.json"
+$parameterFile="azuredeploy.parameters.dev.json"
 $today=Get-Date -Format "dd-MM-yyyy"
-$deploymentName="updateTags-"+"$today"
+$deploymentName="addParameterFile-"+"$today"
 New-AzResourceGroupDeployment `
   -Name $deploymentName `
   -TemplateFile $templateFile `
-  -storagePrefix mystrg01 `
-  -storageSKU Standard_LRS
+  -TemplateParameterFile $parameterFile
