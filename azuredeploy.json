@@ -16,6 +16,24 @@
             "metadata": {
                 "description": "The type of the new storage account created to store the VM disks."
             }
+       },
+       // This is the allowed values for an Azure storage account
+       "storageSKU": {
+           "type": "string",
+           "defaultValue": "Standard_LRS",
+           "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS",
+                "Premium_LRS",
+                "Premium_ZRS",
+                "Standard_GZRS",
+                "Standard_RAGZRS"
+           ],
+           "metadata": {
+               "description": "allowed storage SKUs"
+           }
        }
     },
     "functions": [],
@@ -32,14 +50,14 @@
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku": {
-            "name": "[parameters('storageAccountType')]",
+            "name": "[parameters('storageSKU')]",
             "tier": "Standard"
         }
     }],
     "outputs": {
-            "storageEndpoint": {
+        "storageEndpoint": {
             "type": "object",
-            "value": "[reference('learnexercisenew334634').primaryEndpoints]"
-       }
+            "value": "[reference(parameters('storageName')).primaryEndpoints]"
+        }
     }
 }
