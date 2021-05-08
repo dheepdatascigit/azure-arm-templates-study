@@ -20,3 +20,8 @@ Connect-AzAccount
 Get-AzTenant #get all authorized tenants for an Azure account
 Get-AzSubscription | Format-List -Property Name, Id | Format-Table # lists Subscriptions
 ```
+
+# how to add tags
+```shell
+git tag -a v1.01 -m "blank template run"
+```
