@@ -2,34 +2,62 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "storageName": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "metadata": {
+                "description": "The name of the Azure storage resource"
+            }
+        },
         "storageAccountType": {
-        "type": "string",
-        "defaultValue": "Standard_GRS",
-        "metadata": {
-           "description": "The type of the new storage account created to store the VM disks."
-        }
-      }
+            "type": "string",
+            "defaultValue": "Standard_GRS",
+            "metadata": {
+                "description": "The type of the new storage account created to store the VM disks."
+            }
+       },
+       // This is the allowed values for an Azure storage account
+       "storageSKU": {
+           "type": "string",
+           "defaultValue": "Standard_LRS",
+           "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS",
+                "Premium_LRS",
+                "Premium_ZRS",
+                "Standard_RAGZRS"
+           ],
+           "metadata": {
+               "description": "allowed storage SKUs"
+           }
+       }
     },
     "functions": [],
     "variables": {},
     "resources": [{
-        "name": "learnexercise321",
+        "name": "[parameters('storageName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "tags": {
-            "displayName": "learnexercise321"
+            "displayName": "[parameters('storageName')]",
+            "project": "AZ ARN template test",
+            "Author": "Dheep"
         },
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku": {
-            "name": "[parameters('storageAccountType')]",
+            "name": "[parameters('storageSKU')]",
             "tier": "Standard"
         }
     }],
     "outputs": {
-         "storageEndpoint": {
-           "type": "object",
-           "value": "[reference('learnexercise321').primaryEndpoints]"
-       }
+        "storageEndpoint": {
+            "type": "object",
+            "value": "[reference(parameters('storageName')).primaryEndpoints]"
+            
+        }
     }
 }
