@@ -26,6 +26,18 @@
            "metadata": {
                "description": "allowed storage SKUs"
            }
+       },
+       "resourceTags": {
+           "type": "object",
+           "defaultValue": {
+                "Environment": "Dev",
+                "displayName": "[variables('uniqueStorageName')]",
+                "project": "AZ ARN template test - Tutorial",
+                "Author": "Dheep"
+           },
+           "metadata": {
+               "description": "resource tags"
+           }
        }
     },
     "functions": [],
@@ -34,11 +46,7 @@
         "name": "[variables('uniqueStorageName')]", //[parameters('storageName')]
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
-        "tags": {
-            "displayName": "[variables('uniqueStorageName')]",
-            "project": "AZ ARN template test",
-            "Author": "Dheep"
-        },
+        "tags": "[parameters('resourceTags')]",
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku": {
