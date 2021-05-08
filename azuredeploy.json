@@ -29,13 +29,13 @@
        }
     },
     "functions": [],
-    "variables": {},
+    "variables": {"uniqueStorageName": "[toLower(concat(parameters('storagePrefix'),uniqueString(resourceGroup().id)))]"},
     "resources": [{
-        "name": "[toLower(concat(parameters('storagePrefix'),uniqueString(resourceGroup().id)))]", //[parameters('storageName')]
+        "name": "[variables('uniqueStorageName')]", //[parameters('storageName')]
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2019-06-01",
         "tags": {
-            "displayName": "[toLower(concat(parameters('storagePrefix'),uniqueString(resourceGroup().id)))]",
+            "displayName": "[variables('uniqueStorageName')]",
             "project": "AZ ARN template test",
             "Author": "Dheep"
         },
