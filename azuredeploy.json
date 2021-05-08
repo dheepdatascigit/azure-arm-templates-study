@@ -1,7 +1,15 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+        "storageAccountType": {
+            "type": "string",
+            "defaultValue": "Standard_GRS",
+            "metadata": {
+                "description": "The type of the new storage account created to store the VM disks."
+            }
+       }
+    },
     "functions": [],
     "variables": {},
     "resources": [{
@@ -16,9 +24,14 @@
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku": {
-            "name": "Standard_LRS",
+            "name": "[parameters('storageAccountType')]",
             "tier": "Standard"
         }
     }],
-    "outputs": {}
+    "outputs": {
+            "storageEndpoint": {
+            "type": "object",
+            "value": "[reference('learnexercise47586').primaryEndpoints]"
+       }
+    }
 }
