@@ -55,3 +55,11 @@ The same deployment scopes exist for an Azure CLI deployment:
 - deploy to a subscription, use az deployment sub create.
 - deploy to a management group, use az deployment mg create.
 - deploy to a tenant, use az deployment tenant create.
+
+## Linked templates
+When you're referencing a linked template, you must provide a URI value that's accessible over HTTP or HTTPS. This is unlike our last unit, where we could use a local file.
+
+To use linked templates, you must first stage the templates on a publicly accessible endpoint such as GitHub or Azure Blob Storage. Use an Azure storage account secured by a shared access signature (SAS) token to keep your templates secure from public access.
+
+## Nested templates
+Nested templates allow for advanced deployment scenarios like deploying to multiple Azure Resource Manager scopes or multiple resource groups from a single template file. Unlike linked templates, where each template is stored in its own template files, nested templates allow you to store many individual templates in one file. There are several reasons why you might want to do this, such as when you're deploying resources to multiple resource groups or deployment scopes.
