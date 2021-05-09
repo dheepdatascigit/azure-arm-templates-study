@@ -37,3 +37,21 @@ Get-AzSubscription | Format-List -Property Name, Id | Format-Table # lists Subsc
 git tag -a v1.01 -m "blank template run"
 ```
 add tags at each milestone
+
+# Tips and Tricks
+### Azure PowerShell
+When you're using Azure PowerShell to deploy your resources to Azure with ARM templates, you need to be aware of a few scopes. Depending on the scope of the deployment, you use different commands to target your deployment:
+
+- To deploy to a resource group, use New-AzResourceGroupDeployment.
+- To deploy to a subscription, use New-AzSubscriptionDeployment.
+- To deploy to a management group, use New-AzManagementGroupDeployment.
+- To deploy to a tenant, use New-AzTenantDeployment.
+In the majority of cases, you target your deployment to a resource group (which will be the focus of this module). When you need to apply policies or role assignments across a larger scope, you can target your deployment to a subscription, management group, or tenant.
+
+### Azure CLI
+The same deployment scopes exist for an Azure CLI deployment:
+
+- deploy to a resource group, use az deployment group create.
+- deploy to a subscription, use az deployment sub create.
+- deploy to a management group, use az deployment mg create.
+- deploy to a tenant, use az deployment tenant create.
