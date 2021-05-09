@@ -63,3 +63,28 @@ To use linked templates, you must first stage the templates on a publicly access
 
 ## Nested templates
 Nested templates allow for advanced deployment scenarios like deploying to multiple Azure Resource Manager scopes or multiple resource groups from a single template file. Unlike linked templates, where each template is stored in its own template files, nested templates allow you to store many individual templates in one file. There are several reasons why you might want to do this, such as when you're deploying resources to multiple resource groups or deployment scopes.
+
+## Integrate with Github actions
+To deploy any resources to Azure by using GitHub Actions, you need to create an Azure service principal and give it permissions to create resources defined in your templates. You'll perform that step in the Azure Cloud Shell section of the Azure portal after you're signed in to your subscription.
+
+### Create the service principal
+For the principal of a GitHub Actions workflow to deploy Azure resources, it needs the right built-in contributor.
+
+The following Azure CLI script shows how you can generate an Azure service principal with contributor permissions in an Azure resource group. This resource group is where the workflow will deploy the resources defined in your ARM template.
+
+```shell
+projectName="ARMGitHubActionExercise"
+location="eastus"
+resourceGroupName="RG-${projectName}"
+appName="http://${projectName}"
+
+# Create the resource group
+az group create --name $resourceGroupName --location $location
+
+# Store the resource group ID in a variable
+scope=$(az group list --query "[?contains(name, '$resourceGroupName')].id" -o tsv)
+
+# Create the service principal with contributor rights to the resource group we just created
+az ad sp create-for-rbac --name $appName --role Contributor --scopes $scope --sdk-auth
+```
+In the portal, while you're signed in your subscription, select the Cloud Shell icon to open the shell at the bottom of the page.
