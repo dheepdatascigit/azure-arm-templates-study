@@ -15,6 +15,17 @@ To start working with Azure PowerShell, sign in with your Azure credentials.
 Connect-AzAccount
 ```
 
+# Azure ARM template test tool kit
+git clone https://github.com/Azure/arm-ttk.git
+
+Import-Module path\to\arm-ttk\arm-ttk.psd1
+
+- Note: If you downloaded or cloned the tool to your Downloads directory, the path would look something like this: C:\Users\<user>\Downloads\arm-ttk\arm-ttk\arm-ttk.psd1.
+
+```powershell
+Test-AzTemplate -TemplatePath .
+```
+
 # Some powershell commands
 ```powershell
 Get-AzTenant #get all authorized tenants for an Azure account
